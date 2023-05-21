@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  provider:
+    image: freylukas/pythonprovider:latest  #Erstellt das pythonprovider Image mit dem Tag "latest"
+    build: provider/  #Build-Verzeichnis des Providers
+    ports:
+      - 3000:3000   #Bindet den Provider-Container an den Port 3000
+
+  consumer:
+    image: freylukas/nodeconsumer:latest  #Erstellt das nodeconsumer Image mit dem Tag "latest"
+    build: consumer/  #Build-Verzeichnis des Consumers
+    ports:
+      - 5000:5000   #Bindet den Consumer-Container an den Port 5000
+    depends_on:
+      - provider   #Der Consumer-Container ist abhängig, vom Provider-Container
+
